@@ -1,0 +1,35 @@
+services:
+  n8n_new:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentinel-n8n-final
+    restart: always
+    ports:
+      - "5682:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678/}
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PROXY_HOPS=1
+    volumes:
+      - sentinel_n8n_data:/home/node/.n8n
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    container_name: sentinel-ngrok
+    restart: always
+    network_mode: host
+    volumes:
+      - ./ngrok.yml:/home/ngrok/.config/ngrok/ngrok.yml
+    command:
+      - "start"
+      - "--config"
+      - "/home/ngrok/.config/ngrok/ngrok.yml"
+      - "n8n"
+
+volumes:
+  sentinel_n8n_data:

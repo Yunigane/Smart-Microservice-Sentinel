@@ -16,6 +16,10 @@ public class SentinelController {
     private static final Logger logger = LoggerFactory.getLogger(SentinelController.class);
     private final AtomicBoolean isHealthy = new AtomicBoolean(true);
 
+    public boolean isHealthy() {
+        return isHealthy.get();
+    }
+
     @GetMapping("/health-check")
     public ResponseEntity<String> healthCheck() {
         if (!isHealthy.get()) {

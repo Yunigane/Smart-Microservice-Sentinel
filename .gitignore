@@ -20,3 +20,6 @@ sentinel.log
 
 # Local env
 .env
+infra/.env
+infra/ngrok.yml
+definitive_guide.md
