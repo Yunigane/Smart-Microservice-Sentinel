@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+target/
+.gradle/
+.settings/
+.project
+.classpath
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Sensitive info
+sentinel.log
+*.log
+
+# Gradle wrapper (generally kept in repo, but sometimes excluded if using local installs - usually kept)
+# !gradle/wrapper/gradle-wrapper.jar
+
+# Local env
+.env
